@@ -42,6 +42,19 @@ The core implementation files and dataset are located in the `src/main/java/com/
 
 ---
 
+### 5. DynamicSkylineDemo.java
+
+- **Location**: `src/main/java/com/github/davidmoten/rtree/DynamicSkylineDemo.java`
+- Run its `main` method from the project root, just like `SkylineMain`.
+- Loads the dataset and prints its original 8 Skyline points.
+- Inserts one point, ID `-1` at `(32.82, 17.52)`, which dominates all original
+  Skyline points. The Skyline then contains only this new point.
+- Deletes that same point and prints the restored 8 original Skyline points.
+- Prints `Original skyline restored: true` after checking the result.
+- The dataset file is not modified. The demonstration point is chosen automatically
+  from the dataset's bounds.
+
+
 ## How to Run `SkylineMain`
 
 > **Note**: Always run from the project root directory (`skyLine/`) so that the program can locate `src/main/java/com/github/davidmoten/rtree/Dataset_for_PA1`.
@@ -75,3 +88,5 @@ skyline=8
 37347 33.82 25.82
 37296 41.47 18.52
 ```
+
+AI was used to help implement skyline and assist with code review, incremental skyline maintenance, the dynamic demonstration, automated tests, and documentation.

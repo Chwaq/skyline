@@ -27,8 +27,7 @@ public final class Skyline {
         return compute(tree, deleted, survivors);
     }
 
-    private static <T> List<Entry<T, Point>> compute(RTree<T, Point> tree, Point deleted,
-            List<Entry<T, Point>> initialSkyline) {
+    private static <T> List<Entry<T, Point>> compute(RTree<T, Point> tree, Point deleted, List<Entry<T, Point>> initialSkyline) {
         List<Entry<T, Point>> skyline = new ArrayList<>(initialSkyline);
 
         if(!tree.root().isPresent())
@@ -53,30 +52,24 @@ public final class Skyline {
         return skyline;
     }
 
-    private static<T> void expand(Node<T, Point> node, List<Entry<T, Point>> skyline,
-            PriorityQueue<Candidate<T>> heap, Point deleted){
+    private static<T> void expand(Node<T, Point> node, List<Entry<T, Point>> skyline, PriorityQueue<Candidate<T>> heap, Point deleted){
         if(node instanceof NonLeaf){
             NonLeaf<T, Point> nonLeaf = (NonLeaf<T, Point>) node;
 
             for(int i = 0;i < nonLeaf.count(); i++){
                 Candidate<T> candidate = new Candidate<>(nonLeaf.child(i));
-
                 offerIfUseful(candidate, skyline, heap, deleted);
-
             }
         }else{
             Leaf<T, Point> leaf = (Leaf<T, Point>) node;
-
             for(int i = 0;i < leaf.count(); i++){
                 Candidate<T> candidate = new Candidate<>(leaf.entry(i));
-
                 offerIfUseful(candidate, skyline, heap, deleted);
             }
         }
     }
 
-    private static <T> void offerIfUseful(Candidate<T> candidate, List<Entry<T, Point>> skyline,
-            PriorityQueue<Candidate<T>> heap, Point deleted){
+    private static <T> void offerIfUseful(Candidate<T> candidate, List<Entry<T, Point>> skyline, PriorityQueue<Candidate<T>> heap, Point deleted){
         if (deleted != null) {
             if (candidate.node != null) {
                 // An MBR completely outside the affected upper-right region
@@ -110,7 +103,6 @@ public final class Skyline {
     }
 
     private static final class Candidate<T>{
-
         final Node<T, Point> node;
         final Entry<T, Point> entry;
         final Rectangle bounds;
@@ -130,6 +122,5 @@ public final class Skyline {
             this.score = bounds.x1() + bounds.y1();
         }
     }
-
 
 }

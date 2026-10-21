@@ -35,8 +35,7 @@ public final class DynamicSkyline<T> {
             if (Skyline.dominates(member.geometry(), point.x(), point.y()))
                 return;
         }
-        skyline.removeIf(member -> Skyline.dominates(point,
-                member.geometry().x(), member.geometry().y()));
+        skyline.removeIf(member -> Skyline.dominates(point, member.geometry().x(), member.geometry().y()));
         skyline.add((Entry<T, Point>) entry);
     }
 
@@ -46,11 +45,10 @@ public final class DynamicSkyline<T> {
 
     public void delete(Entry<? extends T, ? extends Point> entry) {
         RTree<T, Point> updated = tree.delete(entry);
+        int index = skyline.indexOf(entry);
         if (updated.size() == tree.size())
             return;
         tree = updated;
-
-        int index = skyline.indexOf(entry);
         if (index < 0)
             return; 
 
